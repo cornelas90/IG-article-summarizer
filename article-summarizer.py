@@ -38,13 +38,14 @@ dims = (1080, 1920)
 ideal_width = dims[0]
 ideal_height = dims[1]
 ideal_aspect = ideal_width / ideal_height
-
-width = size[0]
-height = size[1]
-aspect = width / height
 with Image(blob=image_blob.content) as img:
 	print(img.size)
 	size = (img.size)
+	
+width = size[0]
+height = size[1]
+aspect = width / height
+
 CAPTION1 = '''Business owners around the country are offering up a lament: “no one wants to work.” 
 	A McDonalds franchise said they had to close because no one wants to work; North Carolina 
 	congressman David Rouzer claimed that a too-generous welfare state has turned us all lazy 
@@ -70,13 +71,13 @@ with Image(blob = image_blob.content) as canvas:
 	caption_width = int(canvas.width/1.2)
 	margin_left = int((canvas.width-caption_width)/2)
 	margin_top = int(canvas.height/2)
-
+## Rounded Square background for caption
 with Drawing() as draw:
 	draw.stroke_color = Color('#ff0000')
 	draw.stroke_width = 1
 	draw.fill_color = Color('#ff0000')
 	draw.rectangle(left=margin_left-5, top = margin_top-5, right = (margin_left+caption_width+5), bottom = (margin_top + 295), radius = 5)
-
+	## Importing images, cropping, adding background, captions, save file
 	with Image(blob = image_blob.content) as canvas:
 		canvas.crop(*resize[0])
 		draw(canvas)
